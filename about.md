@@ -17,3 +17,4 @@ Instantly search for levels similar to the current level.
   - Same song
   - Same feature rating (featured, epic, legendary, mythic)
   - Rated only / No stars filters
+

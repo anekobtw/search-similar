@@ -1,0 +1,16 @@
+{
+	"geode": "4.6.1",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "anekobtw.search_similar",
+	"name": "search similar",
+	"version": "v1.0.0",
+	"developer": "anekobtw",
+	"description": "Instantly search for levels similar to the current level.",
+	"repository": "https://github.com/anekobtw/search-similar",
+	"tags": "utility"
+}
