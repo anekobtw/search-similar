@@ -68,16 +68,16 @@ searchSimilarPopup* searchSimilarPopup::create(std::string const& text, GJGameLe
 
 void searchSimilarPopup::onSearch(CCObject* sender) {
     // featured 
-    bool featured = false;
-    bool epic = false;
-    bool mythic = false;
-    bool legendary = false;
+    bool featuredFilter = false;
+    bool epicFilter = false;
+    bool mythicFilter = false;
+    bool legendaryFilter = false;
     
     if (this->featureToggler->isOn()) {
-        featured = currentLevel->m_featured != 0 && currentLevel->m_isEpic == 0;
-        epic = currentLevel->m_isEpic == 1;
-        mythic = currentLevel->m_isEpic == 2;
-        legendary = currentLevel->m_isEpic == 3;
+        featuredFilter = currentLevel->m_featured != 0 && currentLevel->m_isEpic == 0;
+        epicFilter = currentLevel->m_isEpic == 1;
+        mythicFilter = currentLevel->m_isEpic == 2;
+        legendaryFilter = currentLevel->m_isEpic == 3;
     }
 
 
@@ -113,7 +113,7 @@ void searchSimilarPopup::onSearch(CCObject* sender) {
 
     // song
     bool songFilter = false;
-    bool customSong = false;
+    bool customSongFilter = false;
     int songID = 0;
     if (this->songToggler->isOn()) {
         songFilter = true;
@@ -124,36 +124,29 @@ void searchSimilarPopup::onSearch(CCObject* sender) {
         }
 
         if (this->currentLevel->m_songID != 0) {
-            customSong = true;
+            customSongFilter = true;
             songID = this->currentLevel->m_songID;
         }
     }
 
 
-    GJSearchObject* sobject = GJSearchObject::create(
-        SearchType::Search,                          // searchType
-        "",                                          // searchQuery
-        difficulty,                                  // difficulty
-        length,                                      // length
-        0,                                           // page
-        this->ratedOnlyToggler->isOn(),              // star
-        false,                                       // uncompleted
-        featured,                                    // featured
-        songID,                                      // songID
-        false,                                       // original
-        false,                                       // twoPlayer
-        customSong,                                  // customSong
-        songFilter,                                  // songFilter
-        this->noStarsToggler->isOn(),                // noStar
-        false,                                       // coins
-        epic,                                        // epic
-        legendary,                                   // legendary
-        mythic,                                      // mythic
-        false,                                       // onlyCompleted
-        0,                                           // demonFilter
-        0,                                           // folder
-        0                                            // searchMode
-    );
+    // search object
+    GJSearchObject* searchObject = GJSearchObject::create(SearchType::Search);
+    
+    searchObject->m_difficulty = difficulty;
+    searchObject->m_length = length;
+    
+    searchObject->m_starFilter = this->ratedOnlyToggler->isOn();
+    searchObject->m_noStarFilter = this->noStarsToggler->isOn();
+    
+    searchObject->m_featuredFilter = featuredFilter;
+    searchObject->m_epicFilter = epicFilter;
+    searchObject->m_legendaryFilter = legendaryFilter;
+    searchObject->m_mythicFilter = mythicFilter;
 
-    CCDirector::get()->pushScene(CCTransitionFade::create(.5f, LevelBrowserLayer::scene(sobject)));
+    searchObject->m_songID = songID;
+    searchObject->m_customSongFilter = customSongFilter;
+    searchObject->m_songFilter = songFilter;
+
+    CCDirector::get()->pushScene(CCTransitionFade::create(.5f, LevelBrowserLayer::scene(searchObject)));
 }

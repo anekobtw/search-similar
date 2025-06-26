@@ -12,5 +12,5 @@
 	"developer": "anekobtw",
 	"description": "Instantly search for levels similar to the current level.",
 	"repository": "https://github.com/anekobtw/search-similar",
-	"tags": "utility"
+	"tags": ["utility"]
 }
