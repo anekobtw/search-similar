@@ -2,19 +2,18 @@
 
 
 CCMenuItemToggler* createToggler(CCObject* target, CCPoint pos, const std::string& text, CCLayer* layer) {
-    auto* onSpr = CCSprite::createWithSpriteFrameName("GJ_checkOn_001.png");
-    auto* offSpr = CCSprite::createWithSpriteFrameName("GJ_checkOff_001.png");
+    CCSprite* onSpr = CCSprite::createWithSpriteFrameName("GJ_checkOn_001.png");
+    CCSprite* offSpr = CCSprite::createWithSpriteFrameName("GJ_checkOff_001.png");
 
     std::string id = text;
     std::replace(id.begin(), id.end(), ' ', '-');
-    id += "-toggler";
 
-    auto* toggler = CCMenuItemToggler::create(offSpr, onSpr, target, nullptr);
+    CCMenuItemToggler* toggler = CCMenuItemToggler::create(offSpr, onSpr, target, nullptr);
     toggler->setScale(0.63f);
     toggler->setPosition(pos);
-    toggler->setID(id);
+    toggler->setID(id + "-toggler");
 
-    auto* label = CCLabelBMFont::create(text.c_str(), "bigFont.fnt");
+    CCLabelBMFont* label = CCLabelBMFont::create(text.c_str(), "bigFont.fnt");
     label->setScale(0.45f);
     label->setAnchorPoint({ 0.f, 0.5f });
     label->setPosition(pos.x + 20.f, pos.y + 2.f);
@@ -30,7 +29,7 @@ CCMenuItemToggler* createToggler(CCObject* target, CCPoint pos, const std::strin
 bool searchSimilarPopup::setup(std::string const& value) {
     this->setTitle(value.c_str());
  
-    auto* buttonsMenu = CCMenu::create();
+    CCMenu* buttonsMenu = CCMenu::create();
     buttonsMenu->setPosition(0.f, 0.f);
     buttonsMenu->setID("buttons-menu");
     m_mainLayer->addChild(buttonsMenu);
@@ -42,7 +41,7 @@ bool searchSimilarPopup::setup(std::string const& value) {
     ratedOnlyToggler = createToggler(this, { 340.f, 205.f }, "rated only", buttonsMenu);
     noStarsToggler = createToggler(this, { 340.f, 165.f }, "no stars", buttonsMenu);
 
-    auto searchButton = CCMenuItemSpriteExtra::create(ButtonSprite::create("Search"), this, menu_selector(searchSimilarPopup::onSearch));
+    CCMenuItemSpriteExtra* searchButton = CCMenuItemSpriteExtra::create(ButtonSprite::create("Search"), this, menu_selector(searchSimilarPopup::onSearch));
     searchButton->setPosition({240.f, 35.f});
     
     buttonsMenu->addChild(searchButton);

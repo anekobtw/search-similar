@@ -1,5 +1,5 @@
 {
-	"geode": "4.6.1",
+	"geode": "4.6.2",
 	"gd": {
 		"win": "2.2074",
 		"android": "2.2074",
@@ -12,5 +12,10 @@
 	"developer": "anekobtw",
 	"description": "Instantly search for levels similar to the current level.",
 	"repository": "https://github.com/anekobtw/search-similar",
-	"tags": ["utility"]
+	"tags": ["utility"],
+	"resources": {
+        "sprites": [
+            "resources/searchBtn.png"
+        ]
+	}
 }
